@@ -1,5 +1,6 @@
 const mongoose=require('mongoose')
 const bcrypt=require('bcrypt')
+const Area=require('./Area')
 
 const userSchema=new mongoose.Schema(
     {
@@ -20,7 +21,7 @@ const userSchema=new mongoose.Schema(
             
         },
         houseID:{type:String,required:true,unique:true},
-        areaID:{type:String,required:true,unique:true},
+        areaID:{type:String,ref:'Area'},
         accessLevel:{type:String,
                      enum:['admin','driver','user'],
                     default:'user'},

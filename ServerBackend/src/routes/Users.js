@@ -5,7 +5,7 @@ const bodyparser=require('body-parser')
 const connectDB=require('../../src/db/conn')
 router.use(bodyparser.json())
 const userModel=require('../models/Users')
-const users=[]
+const Area=require('../models/Area')
 
 /**
  * @route POST User/SignUP
@@ -14,7 +14,15 @@ const users=[]
  */
 router.post('/register',async (req,res)=>{
     try{
-       
+        
+        const areaExists=await Area.findById(req.body.areaID)
+
+        //Enforcing Referential integrity constraint using areaID
+        if(!areaExists){
+            return res.status(400).send({message:"Referenced area doesn't exists"})
+        }
+
+        //after integrity constraint has been passed
         const user=new userModel({
             emailID:req.body.emailID,
             name:{  firstName:req.body.name.firstName,
@@ -94,6 +102,11 @@ router.get('/',
                ).catch(e=>
                 {console.log(e);})
             })
+
+router.delete('/deleteAll',async (req,res)=>{
+    await userModel.deleteMany()
+    console.log(userModel.find({}));
+})
 
 
 module.exports=router
