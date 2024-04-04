@@ -2,7 +2,7 @@
 
 Project Shuchi is a MERN (MongoDB, Express.js, React.js, Node.js) stack application currently in development stage. Its designed for waste management rating. It allows users to rate waste management facilities in their area, providing valuable feedback to improve waste management services.
 
-## Features
+## Features (Plan of Action)
 
 - **User Authentication**: Users can sign up, log in, and manage their profiles securely.
 - **Rating System**: Users can rate waste management facilities based on their experience.
