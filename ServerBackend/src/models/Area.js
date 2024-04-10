@@ -6,7 +6,7 @@ const areaSchema=new mongoose.Schema(
         name:{type:String,required:true},
         city:{type:String,required:true},
         district:{type:String,required:true},
-     }
+    }
 )
 
 const areaModel=new mongoose.model('Area',areaSchema)

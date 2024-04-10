@@ -4,6 +4,7 @@ const bcrypt=require('bcrypt')
 const bodyparser=require('body-parser')
 router.use(bodyparser.json())
 const areaModel=require('../models/Area')
+const userModel = require('../models/Users')
 
 /**
  * @route POST Area/Insert
@@ -52,5 +53,39 @@ router.get('/',async (req,res)=>{
    
 })
 
+router.get('/countAreaWise',
+async (req,res)=>{
+  try {
+    const Areas=await areaModel.find({})
+    function AreaResp(areaID,areaName,userCount){
+        this.areaId=areaID
+        this.areaName=areaName
+        this.userCount=userCount
+    }
+    const Arr=[]
+    //Attaching a promise to each element in the Areas array
+    //So that all the sync functions get completed
+    const promises=Areas.map(async area=>{
+        await userModel.find({areaID:area._id}).then(users=>{
+            const arearesp=new AreaResp(area._id,area.name,users.length)
+            Arr.push(arearesp)
+        })       
+        
+    })
+
+    Promise.all(promises).then(
+     ()=>{
+        res.status(200).send(Arr)
+     }   
+    ).catch(e=>{
+        console.log(e);
+    })
+
+    
+  }catch(e){
+    console.log(e);
+    res.status(500).send()
+  }
+})
 
 module.exports=router

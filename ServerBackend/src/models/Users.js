@@ -21,7 +21,7 @@ const userSchema=new mongoose.Schema(
             
         },
         houseID:{type:String,required:true,unique:true},
-        areaID:{type:String,ref:'Area'},
+        areaID:{type:String,ref:'Area',unique:false},
         accessLevel:{type:String,
                      enum:['admin','driver','user'],
                     default:'user'},
@@ -39,5 +39,8 @@ userSchema.pre('save',async function(next){
     next()
 })
 
+
+
 const userModel=new mongoose.model('User',userSchema)
+
 module.exports=userModel
