@@ -11,6 +11,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 const printConsole=require('./src/db/conn.js')
 const connectDB=require('./src/db/conn.js')
+const Profile=require('./src/routes/Profiles')
 
 process.on('unhandledRejection', error => {
     console.error('Unhandled promise rejection:', error);
@@ -27,6 +28,7 @@ const status={
    
 app.use('/Area',Area)
 app.use('/User',Users)
+app.use('/Profile',Profile)
 
 
 

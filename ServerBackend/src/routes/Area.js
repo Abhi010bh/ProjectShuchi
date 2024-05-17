@@ -5,13 +5,14 @@ const bodyparser=require('body-parser')
 router.use(bodyparser.json())
 const areaModel=require('../models/Area')
 const userModel = require('../models/Users')
+const adminAuthenticate=require('../controllers/adminAcc.middleware')
 
 /**
  * @route POST Area/Insert
  * @description Adding Areas
  * @access Public
  */
-router.post('/insert',async (req,res)=>{
+router.post('/insert',adminAuthenticate,async (req,res)=>{
     try{
        
         const Area=new areaModel({
@@ -52,6 +53,8 @@ router.get('/',async (req,res)=>{
     }).catch(e=>{console.log(e);})
    
 })
+
+
 
 router.get('/countAreaWise',
 async (req,res)=>{

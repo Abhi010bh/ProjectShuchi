@@ -8,10 +8,11 @@ module.exports=(req,res,next)=>{
             "secret-key"
         )
         req.userData={
-            emailID:decoded.emailID
+            emailID:decoded.emailID,
         }
         next()
     } catch (error) {
+        
         console.log(error);
         res.status(401).json({error:'Authentication failed'})
     }
