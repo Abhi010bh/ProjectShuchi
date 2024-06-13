@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 // Replace the following with your Atlas connection string
-const url = process.env.ATLAS_URI || '';
+const url = process.env.ATLAS_URI || 'mongodb+srv://abhibh01234:6SNiBcsToLKlMPtr@cluster0.2qlftto.mongodb.net/Shuchi?retryWrites=true&w=majority&appName=Cluster0';
 
 // Connect to your Atlas cluster with Mongoose
 async function connectDB() {
